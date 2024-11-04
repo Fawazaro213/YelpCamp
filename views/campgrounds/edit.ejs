@@ -10,7 +10,7 @@
       enctype="multipart/form-data"
     >
       <div class="mb-3">
-        <label class="form-label" for="title">Title</label>
+        <label class="form-label" for="title">Name</label>
         <input
           class="form-control"
           type="text"
@@ -34,7 +34,7 @@
       </div>
 
       <div class="mb-3">
-        <label class="form-label" for="price">Campground Price</label>
+        <label class="form-label" for="price">Hotel Price</label>
         <div class="input-group">
           <span class="input-group-text" id="price-label">$</span>
           <input
@@ -85,9 +85,9 @@
         <% }) %> 
       </div>
       <div class="mb-3">
-        <button class="btn btn-info">Update Campground</button>
+        <button class="btn btn-info">Update HotelGround</button>
       </div>
     </form>
-    <a href="/campgrounds/<%= campground._id%>">Back To Campground</a>
+    <a href="/campgrounds/<%= campground._id%>">Back To Hotel</a>
   </div>
 </div>

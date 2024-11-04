@@ -5,21 +5,27 @@ const geocoder = mbxGeocoding({ accessToken: mapBoxToken });
 const Campground = require("../models/campground");
 
 module.exports.index = async (req, res) => {
-  const { search } = req.query; 
+  const { search } = req.query;
   let campgrounds;
 
   if (search) {
+    // Perform search if a query exists, matching title, description, or location
     campgrounds = await Campground.find({
       $or: [
         { title: { $regex: search, $options: "i" } },
-        { description: { $regex: search, $options: "i" } } 
+        { description: { $regex: search, $options: "i" } },
+        { location: { $regex: search, $options: "i" } }
       ]
     });
   } else {
+    // If no search query, return all campgrounds
     campgrounds = await Campground.find({});
   }
+
   res.render("campgrounds/index", { campgrounds });
 };
+
+
 
 module.exports.renderNewForm = async (req, res) => {
   res.render("campgrounds/new");
