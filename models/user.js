@@ -8,7 +8,14 @@ const UserSchema = new Schema({
     required: true,
     unique: true,
   },
-});
+  fullName: {
+    type: String,
+    required: true
+  },
+  profileImage: {
+    type: String,
+    default: '/default-profile.png'
+}});
 UserSchema.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model("User", UserSchema);

@@ -38,3 +38,28 @@ module.exports.logout = (req, res, next) => {
     res.redirect("/");
   });
 };
+
+module.exports.renderProfile = (req, res) => {
+  res.render('users/profile', { user: req.user });
+};
+
+module.exports.updateProfile = async (req, res) => {
+  try {
+    const { fullName, email } = req.body;
+    const user = await User.findByIdAndUpdate(req.user._id, 
+      { fullName, email }, 
+      { new: true }
+    );
+    
+    if (req.file) {
+      user.profileImage = req.file.path; // If using file upload
+      await user.save();
+    }
+    
+    req.flash('success', 'Profile updated successfully');
+    res.redirect('/profile');
+  } catch (err) {
+    req.flash('error', err.message);
+    res.redirect('/profile');
+  }
+};
